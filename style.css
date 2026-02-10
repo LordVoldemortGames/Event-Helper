@@ -1,0 +1,13 @@
+body {
+  font-family: 'Indie Flower', cursive;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: 50px 20px;
+  border-bottom: 2px solid rgb(0, 0, 0);
+}
