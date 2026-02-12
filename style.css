@@ -4,7 +4,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #000000 0%, #8000ff 100%);
   color: #333;
   line-height: 1.6;
   min-height: 100vh;
@@ -17,4 +17,66 @@ body {
   padding: 3rem 0;
   text-align: center;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+main.container {
+  padding: 3rem 2rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  background-color: #4b67a2;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.input {
+  width: 500px;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(128, 128, 128, 0.5);
+  font-size: 1rem;
+  color: #000;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
 }
