@@ -1,5 +1,5 @@
 * {
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Courier new', sans-serif;
   color: white;
 }
 
@@ -143,4 +143,17 @@ th {
 
 tbody tr:hover {
   background-color: #e0e0e0;
+}
+
+.footer {
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer p {
+  margin: 0;
 }
