@@ -20,4 +20,12 @@ const updateLabel = () => {
 input1.addEventListener('input', updateLabel);
 input2.addEventListener('input', updateLabel);
 
+// SchulPin auf 6 Zeichen begrenzen
+const schoolpinInput = document.getElementById("schoolpin-register");
+schoolpinInput.addEventListener('input', () => {
+    if (schoolpinInput.value.length > 6) {
+        schoolpinInput.value = schoolpinInput.value.slice(0, 6);
+    }
+});
+
 
