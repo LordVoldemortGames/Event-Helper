@@ -1,0 +1,1 @@
+document.getElementById("school-name").textContent = "Werner-von-Siemens-Gymnasium";

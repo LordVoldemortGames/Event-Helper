@@ -1,3 +1,4 @@
+// den username erstellen
 const input1 = document.getElementById("firstname-register");
 const input2 = document.getElementById("lastname-register");
 const label = document.getElementById("username-display");
