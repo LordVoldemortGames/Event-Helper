@@ -58,7 +58,7 @@ document.addEventListener('keyup', updateWarnings);
 
 // Login-Validierung für admin/sternbus8 und Weiterleitung zu admindash.html
 const redirectToDashboard = () => {
-    window.open('admindash.html', '_blank');
+    window.open('../administration/admindash.html', '_blank');
 };
 
 const showWarning = (message) => {
