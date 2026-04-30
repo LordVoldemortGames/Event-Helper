@@ -304,3 +304,299 @@ select {
   color: white;
   margin-bottom: 1rem;
 }
+
+/* Materialliste Styles */
+.material-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  overflow: hidden;
+  min-width: 800px;
+  table-layout: fixed;
+}
+
+.material-table th,
+.material-table td {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.material-table th {
+  background: rgba(255, 255, 255, 0.15);
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.material-table td {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+}
+
+.material-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+/* Spaltenspezifische Breiten */
+.material-table th:nth-child(1),
+.material-table td:nth-child(1) {
+  width: 30%; /* Modell */
+}
+
+.material-table th:nth-child(2),
+.material-table td:nth-child(2) {
+  width: 25%; /* Marke */
+}
+
+.material-table th:nth-child(3),
+.material-table td:nth-child(3) {
+  width: 25%; /* Inventarnummer */
+}
+
+.material-table th:nth-child(4),
+.material-table td:nth-child(4) {
+  width: 20%; /* Status */
+}
+
+.material-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.material-actions .btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+}
+
+/* Materialliste Container für besseres Layout */
+.material-list-section {
+  flex: 1 1 100%;
+  max-width: none;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+/* Wrapper für die Tabelle um horizontales Scrolling zu ermöglichen */
+.material-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.material-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.status-available {
+  background: #28a745;
+  color: white;
+}
+
+.status-borrowed {
+  background: #ffc107;
+  color: black;
+}
+
+.status-defect {
+  background: #dc3545;
+  color: white;
+}
+
+.status-maintenance {
+  background: #17a2b8;
+  color: white;
+}
+
+.material-form {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.material-form.hidden {
+  display: none;
+}
+
+.material-form input,
+.material-form select,
+.material-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: inherit;
+}
+
+.material-form select {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.material-form select option {
+  background: #333;
+  color: white;
+}
+
+.material-form input::placeholder,
+.material-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.material-form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btnev {
+  background-color: #dc3545;
+}
+
+.btnev:hover {
+  background-color: #c82333;
+}
+
+/* Material Modal Styles */
+.material-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.material-modal.hidden {
+  display: none;
+}
+
+.material-modal-content {
+  background: rgba(15, 15, 40, 0.98);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 2rem;
+  width: min(500px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  color: white;
+  position: relative;
+}
+
+.material-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.material-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.material-modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: white;
+  text-align: center;
+}
+
+.modal-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.modal-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #d1d5db;
+  font-weight: 500;
+}
+
+.modal-form-group input,
+.modal-form-group select,
+.modal-form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+}
+
+.modal-form-group input:focus,
+.modal-form-group select:focus,
+.modal-form-group textarea:focus {
+  outline: none;
+  border-color: #4b67a2;
+  box-shadow: 0 0 0 2px rgba(75, 103, 162, 0.2);
+}
+
+.modal-form-group select {
+  background: rgba(15, 15, 40, 0.98);
+  color: white;
+}
+
+.modal-form-group option {
+  background: rgba(15, 15, 40, 0.98);
+  color: white;
+}
+
+.modal-form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.modal-buttons .btn {
+  flex: 1;
+  min-width: 120px;
+}
