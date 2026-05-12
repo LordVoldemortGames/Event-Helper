@@ -20,7 +20,7 @@
             <section class="glass-card"> 
                     <header class="card-header">
                         <h2>Aktuelle Projekte</h2>
-                        <button class="btn">+</button>
+                        <button id="dash-new-project" class="btn">+</button>
                     </header>
                 
             </section>
@@ -28,28 +28,29 @@
             <section class="glass-card"> 
                 <header class="card-header">
                     <h2>Aktuelle Aufgaben</h2>
-                    <button class="btn">+</button>
+                    <button id="dash-new-task" class="btn">+</button>
                 </header>
 
             </section>
 
             <section class="glass-card material-list-section">
+
                 <header class="card-header">
                     <h2>Materialliste</h2>
-                    <button id="add-material-btn" class="btn">+</button>
+                    <button id="dash-add-material" class="btn">+</button>
                 </header>
+                
                 <div class="material-table-wrapper">
-                <table id="material-table" class="material-table">
+                <table id="dash-material-table" class="material-table">
                     <thead>
                         <tr>
                             <th>Modell</th>
                             <th>Marke</th>
-                            <th>Kategorie</th>
                             <th>Inventarnummer</th>
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody id="material-list">
+                    <tbody id="dash-material-list">
                         <!-- Materialien werden hier dynamisch eingefügt -->
                     </tbody>
                 </table>
@@ -62,29 +63,29 @@
         </main>
 
         <!-- Material Modal -->
-        <div id="material-modal" class="material-modal hidden" aria-hidden="true">
+        <div id="dash-material-modal" class="material-modal hidden" aria-hidden="true">
             <div class="material-modal-content">
-                <button id="material-modal-close" class="btn material-close">×</button>
-                <h3 id="material-modal-title">Material bearbeiten</h3>
+                <button id="dash-material-modal-close" class="btn material-close">×</button>
+                <h3 id="dash-material-modal-title">Material bearbeiten</h3>
                 
                 <div class="modal-form-group">
-                    <label for="modal-material-model">Modell:</label>
-                    <input type="text" id="modal-material-model" required>
+                    <label for="dash-modal-material-model">Modell:</label>
+                    <input type="text" id="dash-modal-material-model" required>
                 </div>
                 
                 <div class="modal-form-group">
-                    <label for="modal-material-brand">Marke:</label>
-                    <input type="text" id="modal-material-brand" required>
+                    <label for="dash-modal-material-brand">Marke:</label>
+                    <input type="text" id="dash-modal-material-brand" required>
                 </div>
                 
                 <div class="modal-form-group">
-                    <label for="modal-material-inventory">Inventarnummer:</label>
-                    <input type="text" id="modal-material-inventory" required>
+                    <label for="dash-modal-material-inventory">Inventarnummer:</label>
+                    <input type="text" id="dash-modal-material-inventory" required>
                 </div>
                 
                 <div class="modal-form-group">
-                    <label for="modal-material-status">Status:</label>
-                    <select id="modal-material-status" required>
+                    <label for="dash-modal-material-status">Status:</label>
+                    <select id="dash-modal-material-status" required>
                         <option value="">Status wählen</option>
                         <option value="verfügbar">Verfügbar</option>
                         <option value="ausgeliehen">Ausgeliehen</option>
@@ -92,22 +93,28 @@
                         <option value="wartung">In Wartung</option>
                     </select>
                 </div>
-                
+
                 <div class="modal-form-group">
-                    <label for="modal-material-notes">Notizen:</label>
-                    <textarea id="modal-material-notes" rows="3" placeholder="Optionale Notizen"></textarea>
+                    <label for="dash-modal-material-class">Kategorie:</label>
+                    <input type="text" id="dash-modal-material-class" required placeholder="z.B. Kamera, Mikrofon, etc.">
                 </div>
-                
+
+                <div class="modal-form-group">
+                    <label for="dash-modal-material-notes">Notizen:</label>
+                    <textarea id="dash-modal-material-notes" rows="3" placeholder="Optionale Notizen"></textarea>
+                </div>
+
                 <div class="modal-buttons">
-                    <button id="material-modal-save" class="btn">Speichern</button>
-                    <button id="material-modal-delete" class="btn btnev">Löschen</button>
-                    <button id="material-modal-cancel" class="btn">Abbrechen</button>
+                    <button id="dash-material-modal-save" class="btn">Speichern</button>
+                    <button id="dash-material-modal-delete" class="btn btnev">Löschen</button>
+                    <button id="dash-material-modal-cancel" class="btn">Abbrechen</button>
                 </div>
             </div>
         </div>
 
         <footer class="footer">
             <p>&copy; 2026 EventHelper project visit <a href="https://github.com/LordVoldemortGames/Event-Helper" target="_blank">EventHelper on GitHub</a> for more information</p>
+            <a class='a' href="../hilfe/help.html" target="_blank">HILFE</a>
         </footer>
 
     </body>

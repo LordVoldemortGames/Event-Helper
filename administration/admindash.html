@@ -20,7 +20,7 @@
             <section class="glass-card">
                     <header class="card-header">
                         <h2>Alle Schulen</h2>
-                        <button class="btn">+</button>
+                        <button id="admin-new-school" class="btn">+</button>
                     </header>
                 
             </section>
@@ -28,7 +28,7 @@
             <section class="glass-card">
                 <header class="card-header">
                     <h2>Aktuelle Aufgaben</h2>
-                    <button class="btn">+</button>
+                    <button id="admin-new-task" class="btn">+</button>
                 </header>
 
             </section>
@@ -37,43 +37,43 @@
                 <header class="card-header">
                     <h2>Neue Anfragen <span id="ticket-counter-value" class="ticket-counter"></span></h2>
                     <div class="admin-action-buttons">
-                        <button id="new-ticket-admin" class="btn">+ Ticket</button>
-                        <button id="reset-ticket-counter" class="btn btnev">Counter zurücksetzen</button>
+                        <button id="admin-new-ticket" class="btn">+ Ticket</button>
+                        <button id="admin-reset-ticket-counter" class="btn btnev">Counter zurücksetzen</button>
                     </div>
                 </header>
-                <div id="ticket-list" class="ticket-list"></div>
+                <div id="admin-ticket-list" class="ticket-list"></div>
             </section>
         </main>
 
-        <div id="ticket-detail-modal" class="ticket-modal hidden" aria-hidden="true">
+        <div id="admin-ticket-detail-modal" class="ticket-modal hidden" aria-hidden="true">
             <div class="ticket-modal-content">
-                <button id="ticket-modal-close" class="btn ticket-close">Schließen</button>
-                <h2 id="modal-ticket-number">Ticket</h2>
+                <button id="admin-ticket-modal-close" class="btn ticket-close">Schließen</button>
+                <h2 id="admin-modal-ticket-number">Ticket</h2>
                 <div class="ticket-detail-grid">
                     <div>
                         <label>Schulname</label>
-                        <input id="modal-school-name" readonly>
+                        <input id="admin-modal-school-name" readonly>
                     </div>
                     <div>
                         <label>Kontakt</label>
-                        <input id="modal-contact-info" readonly>
+                        <input id="admin-modal-contact-info" readonly>
                     </div>
                     <div>
                         <label>Erstellt am</label>
-                        <input id="modal-created-at" readonly>
+                        <input id="admin-modal-created-at" readonly>
                     </div>
                     <div>
                         <label>Quelle</label>
-                        <input id="modal-source" readonly>
+                        <input id="admin-modal-source" readonly>
                     </div>
                 </div>
                 <div class="ticket-section">
                     <label>Nachricht</label>
-                    <textarea id="modal-message" readonly rows="4"></textarea>
+                    <textarea id="admin-modal-message" readonly rows="4"></textarea>
                 </div>
                 <div class="ticket-section">
                     <label>Status</label>
-                    <select id="modal-status">
+                    <select id="admin-modal-status">
                         <option value="offen">offen</option>
                         <option value="in Bearbeitung">in Bearbeitung</option>
                         <option value="geschlossen">geschlossen</option>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="ticket-section">
                     <label>Dringlichkeit</label>
-                    <select id="modal-urgency">
+                    <select id="admin-modal-urgency">
                         <option value="niedrig">niedrig</option>
                         <option value="normal">normal</option>
                         <option value="hoch">hoch</option>
@@ -89,11 +89,11 @@
                 </div>
                 <div class="ticket-section">
                     <label>Admin-Notiz</label>
-                    <textarea id="modal-note" rows="4" placeholder="Notizen hier eingeben..."></textarea>
+                    <textarea id="admin-modal-note" rows="4" placeholder="Notizen hier eingeben..."></textarea>
                 </div>
                 <div class="ticket-actions">
-                    <button id="ticket-save" class="btn">Speichern</button>
-                    <button id="ticket-delete" class="btn btnev">Ticket löschen</button>
+                    <button id="admin-ticket-save" class="btn">Speichern</button>
+                    <button id="admin-ticket-delete" class="btn btnev">Ticket löschen</button>
                 </div>
             </div>
         </div>

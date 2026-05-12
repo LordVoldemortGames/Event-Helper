@@ -1,33 +1,34 @@
 // den username erstellen
-const input1 = document.getElementById("firstname-register");
-const input2 = document.getElementById("lastname-register");
-const label = document.getElementById("username-display");
+const input1 = document.getElementById("register-firstname");
+const input2 = document.getElementById("register-lastname");
+const usernameLabel = document.getElementById("register-username");
 
 const updateLabel = () => {
-    const first = input1.value.trim();
-    const last = input2.value.trim();
+    const first = input1?.value.trim() || '';
+    const last = input2?.value.trim() || '';
 
     if (first.length > 0 && last.length > 0) {
-        // Erster Buchstabe von firstname + lastname (alles klein)
         const result = first.charAt(0).toLowerCase() + last.toLowerCase();
-        
-        // Den Text in das Label schreiben
-        document.getElementById("username-display").textContent = result;
-    } else {
-        document.getElementById("username-display").textContent = ""; // Leer machen, wenn Felder leer sind
+        if (usernameLabel) {
+            usernameLabel.textContent = result;
+        }
+    } else if (usernameLabel) {
+        usernameLabel.textContent = "";
     }
 };
 
-input1.addEventListener('input', updateLabel);
-input2.addEventListener('input', updateLabel);
+input1?.addEventListener('input', updateLabel);
+input2?.addEventListener('input', updateLabel);
 
 // SchulPin auf 6 Zeichen begrenzen
-const schoolpinInput = document.getElementById("schoolpin-register");
-schoolpinInput.addEventListener('input', () => {
-    if (schoolpinInput.value.length > 6) {
-        schoolpinInput.value = schoolpinInput.value.slice(0, 6);
-    }
-});
+const schoolpinInput = document.getElementById("register-schoolpin");
+if (schoolpinInput) {
+    schoolpinInput.addEventListener('input', () => {
+        if (schoolpinInput.value.length > 6) {
+            schoolpinInput.value = schoolpinInput.value.slice(0, 6);
+        }
+    });
+}
 
 // Warnung für Login-Probleme
 const passwordLoginInput = document.getElementById("password-login");
@@ -98,7 +99,7 @@ const handleLogin = (usernameInput, passwordInput) => {
 const initLogin = () => {
     clearWarning();
 
-    const usernameInput = document.getElementById('username-login');
+    const usernameInput = document.getElementById('login-username');
     const passwordInput = document.getElementById('password-login');
     const loginButton = document.getElementById('login-button');
 

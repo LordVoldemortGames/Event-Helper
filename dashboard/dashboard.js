@@ -58,7 +58,7 @@ const createMaterialElement = (material, index) => {
 };
 
 const renderMaterialList = () => {
-  const tbody = document.getElementById('material-list');
+  const tbody = document.getElementById('dash-material-list');
   if (!tbody) {
     return;
   }
@@ -85,44 +85,24 @@ const renderMaterialList = () => {
 };
 
 const showMaterialForm = (material = null, index = null) => {
-  const form = document.getElementById('material-form');
-  const modelInput = document.getElementById('material-model');
-  const brandInput = document.getElementById('material-brand');
-  const inventoryInput = document.getElementById('material-inventory');
-  const statusInput = document.getElementById('material-status');
-  const notesInput = document.getElementById('material-notes');
-
-  if (material) {
-    title.textContent = 'Material bearbeiten';
-    modelInput.value = material.model;
-    brandInput.value = material.brand;
-    inventoryInput.value = material.inventory;
-    statusInput.value = material.status;
-    notesInput.value = material.notes || '';
-    form.dataset.editIndex = index;
-  } else {
-    title.textContent = 'Neues Material hinzufügen';
-    modelInput.value = '';
-    brandInput.value = '';
-    inventoryInput.value = '';
-    statusInput.value = '';
-    notesInput.value = '';
-    delete form.dataset.editIndex;
-  }
-
-  form.classList.remove('hidden');
+  openMaterialModal(material, index);
 };
 
 // Modal-Funktionen
 const openMaterialModal = (material = null, index = null) => {
-  const modal = document.getElementById('material-modal');
-  const title = document.getElementById('material-modal-title');
-  const modelInput = document.getElementById('modal-material-model');
-  const brandInput = document.getElementById('modal-material-brand');
-  const inventoryInput = document.getElementById('modal-material-inventory');
-  const statusInput = document.getElementById('modal-material-status');
-  const notesInput = document.getElementById('modal-material-notes');
-  const deleteButton = document.getElementById('material-modal-delete');
+  const modal = document.getElementById('dash-material-modal');
+  const title = document.getElementById('dash-material-modal-title');
+  const modelInput = document.getElementById('dash-modal-material-model');
+  const brandInput = document.getElementById('dash-modal-material-brand');
+  const inventoryInput = document.getElementById('dash-modal-material-inventory');
+  const statusInput = document.getElementById('dash-modal-material-status');
+  const categoryInput = document.getElementById('dash-modal-material-class');
+  const notesInput = document.getElementById('dash-modal-material-notes');
+  const deleteButton = document.getElementById('dash-material-modal-delete');
+
+  if (!modal || !title || !modelInput || !brandInput || !inventoryInput || !statusInput || !notesInput) {
+    return;
+  }
 
   if (material) {
     title.textContent = 'Material bearbeiten';
@@ -130,18 +110,20 @@ const openMaterialModal = (material = null, index = null) => {
     brandInput.value = material.brand;
     inventoryInput.value = material.inventory;
     statusInput.value = material.status;
+    categoryInput.value = material.category || '';
     notesInput.value = material.notes || '';
     modal.dataset.editIndex = index;
-    deleteButton.style.display = 'inline-block';
+    if (deleteButton) deleteButton.style.display = 'inline-block';
   } else {
     title.textContent = 'Neues Material hinzufügen';
     modelInput.value = '';
     brandInput.value = '';
     inventoryInput.value = '';
     statusInput.value = '';
+    categoryInput.value = '';
     notesInput.value = '';
     delete modal.dataset.editIndex;
-    deleteButton.style.display = 'none';
+    if (deleteButton) deleteButton.style.display = 'none';
   }
 
   modal.classList.remove('hidden');
@@ -149,23 +131,32 @@ const openMaterialModal = (material = null, index = null) => {
 };
 
 const closeMaterialModal = () => {
-  const modal = document.getElementById('material-modal');
+  const modal = document.getElementById('dash-material-modal');
+  if (!modal) {
+    return;
+  }
   modal.classList.add('hidden');
   modal.setAttribute('aria-hidden', 'true');
 };
 
 const saveMaterialFromModal = () => {
-  const modelInput = document.getElementById('modal-material-model');
-  const brandInput = document.getElementById('modal-material-brand');
-  const inventoryInput = document.getElementById('modal-material-inventory');
-  const statusInput = document.getElementById('modal-material-status');
-  const notesInput = document.getElementById('modal-material-notes');
-  const modal = document.getElementById('material-modal');
+  const modelInput = document.getElementById('dash-modal-material-model');
+  const brandInput = document.getElementById('dash-modal-material-brand');
+  const inventoryInput = document.getElementById('dash-modal-material-inventory');
+  const statusInput = document.getElementById('dash-modal-material-status');
+  const categoryInput = document.getElementById('dash-modal-material-class');
+  const notesInput = document.getElementById('dash-modal-material-notes');
+  const modal = document.getElementById('dash-material-modal');
+
+  if (!modelInput || !brandInput || !inventoryInput || !statusInput || !notesInput || !modal) {
+    return;
+  }
 
   const model = modelInput.value.trim();
   const brand = brandInput.value.trim();
   const inventory = inventoryInput.value.trim();
   const status = statusInput.value;
+  const category = categoryInput?.value.trim() || '';
   const notes = notesInput.value.trim();
 
   if (!model || !brand || !inventory || !status) {
@@ -173,7 +164,7 @@ const saveMaterialFromModal = () => {
     return;
   }
 
-  const material = { model, brand, inventory, status, notes };
+  const material = { model, brand, inventory, status, category, notes };
   const materials = getStoredMaterials();
 
   if (modal.dataset.editIndex !== undefined) {
@@ -189,9 +180,12 @@ const saveMaterialFromModal = () => {
 };
 
 const deleteMaterialFromModal = () => {
-  const modal = document.getElementById('material-modal');
-  const index = parseInt(modal.dataset.editIndex);
+  const modal = document.getElementById('dash-material-modal');
+  if (!modal || modal.dataset.editIndex === undefined) {
+    return;
+  }
 
+  const index = parseInt(modal.dataset.editIndex);
   if (!confirm('Material wirklich löschen?')) {
     return;
   }
@@ -268,17 +262,17 @@ const initMaterialList = () => {
   renderMaterialList();
 
   // Event Listener
-  const addButton = document.getElementById('add-material-btn');
+  const addButton = document.getElementById('dash-add-material');
   if (addButton) {
     addButton.addEventListener('click', () => openMaterialModal());
   }
 
   // Event Listener für Modal
-  const modal = document.getElementById('material-modal');
-  const modalClose = document.getElementById('material-modal-close');
-  const modalSave = document.getElementById('material-modal-save');
-  const modalDelete = document.getElementById('material-modal-delete');
-  const modalCancel = document.getElementById('material-modal-cancel');
+  const modal = document.getElementById('dash-material-modal');
+  const modalClose = document.getElementById('dash-material-modal-close');
+  const modalSave = document.getElementById('dash-material-modal-save');
+  const modalDelete = document.getElementById('dash-material-modal-delete');
+  const modalCancel = document.getElementById('dash-material-modal-cancel');
 
   if (modal) {
     // Schließe Modal beim Klick außerhalb
@@ -306,7 +300,7 @@ const initMaterialList = () => {
   }
 
   // Event Delegation für dynamische Tabellenzeilen
-  const materialList = document.getElementById('material-list');
+  const materialList = document.getElementById('dash-material-list');
   if (materialList) {
     materialList.addEventListener('click', (event) => {
       const row = event.target.closest('tr');

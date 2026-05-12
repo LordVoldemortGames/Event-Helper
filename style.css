@@ -600,3 +600,10 @@ select {
   flex: 1;
   min-width: 120px;
 }
+
+.a
+{
+  position: fixed;
+  bottom: 20px;
+  right: 60px;
+}

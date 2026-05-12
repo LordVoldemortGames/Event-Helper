@@ -51,9 +51,9 @@ const createTicketNumber = () => {
 };
 
 const clearInfoForm = () => {
-  const schoolName = document.getElementById('info-school-name');
-  const contactInfo = document.getElementById('info-contact-info');
-  const message = document.getElementById('info-message');
+  const schoolName = document.getElementById('help-school-name');
+  const contactInfo = document.getElementById('help-contact-info');
+  const message = document.getElementById('help-message');
 
   if (schoolName) schoolName.value = '';
   if (contactInfo) contactInfo.value = '';
@@ -61,7 +61,7 @@ const clearInfoForm = () => {
 };
 
 const createStatusLabel = () => {
-  const formSection = document.querySelector('#info-new-ticket')?.closest('section') || document.querySelector('#admin-new-ticket')?.closest('section');
+  const formSection = document.querySelector('#help-new-ticket')?.closest('section');
   if (!formSection) {
     return null;
   }
@@ -189,7 +189,7 @@ const buildTicketElement = (ticket) => {
 };
 
 const renderTicketList = () => {
-  const container = document.getElementById('admin-ticket-list') || document.getElementById('ticket-list');
+  const container = document.getElementById('ticket-list');
   if (!container) {
     return;
   }
@@ -213,7 +213,7 @@ const renderTicketList = () => {
 const openTicketModal = (ticketNumber) => {
   const tickets = getStoredTickets();
   const ticket = tickets.find((item) => item.ticketNumber === ticketNumber);
-  const modal = document.getElementById('admin-ticket-detail-modal');
+  const modal = document.getElementById('ticket-detail-modal');
   if (!ticket || !modal) {
     return;
   }
@@ -221,21 +221,21 @@ const openTicketModal = (ticketNumber) => {
   modal.classList.remove('hidden');
   modal.setAttribute('aria-hidden', 'false');
 
-  document.getElementById('admin-modal-ticket-number').textContent = `Ticket ${ticket.ticketNumber}`;
-  document.getElementById('admin-modal-school-name').value = ticket.schoolName;
-  document.getElementById('admin-modal-contact-info').value = ticket.contactInfo;
-  document.getElementById('admin-modal-created-at').value = new Date(ticket.createdAt).toLocaleString('de-DE');
-  document.getElementById('admin-modal-source').value = ticket.source;
-  document.getElementById('admin-modal-message').value = ticket.message || '';
-  document.getElementById('admin-modal-status').value = ticket.status;
-  document.getElementById('admin-modal-urgency').value = ticket.urgency;
-  document.getElementById('admin-modal-note').value = ticket.note || '';
-  document.getElementById('admin-ticket-save').dataset.ticketNumber = ticket.ticketNumber;
-  document.getElementById('admin-ticket-delete').dataset.ticketNumber = ticket.ticketNumber;
+  document.getElementById('modal-ticket-number').textContent = `Ticket ${ticket.ticketNumber}`;
+  document.getElementById('modal-school-name').value = ticket.schoolName;
+  document.getElementById('modal-contact-info').value = ticket.contactInfo;
+  document.getElementById('modal-created-at').value = new Date(ticket.createdAt).toLocaleString('de-DE');
+  document.getElementById('modal-source').value = ticket.source;
+  document.getElementById('modal-message').value = ticket.message || '';
+  document.getElementById('modal-status').value = ticket.status;
+  document.getElementById('modal-urgency').value = ticket.urgency;
+  document.getElementById('modal-note').value = ticket.note || '';
+  document.getElementById('ticket-save').dataset.ticketNumber = ticket.ticketNumber;
+  document.getElementById('ticket-delete').dataset.ticketNumber = ticket.ticketNumber;
 };
 
 const closeTicketModal = () => {
-  const modal = document.getElementById('admin-ticket-detail-modal');
+  const modal = document.getElementById('ticket-detail-modal');
   if (!modal) {
     return;
   }
@@ -245,16 +245,16 @@ const closeTicketModal = () => {
 };
 
 const updateTicketFromModal = () => {
-  const ticketNumber = document.getElementById('admin-ticket-save').dataset.ticketNumber;
+  const ticketNumber = document.getElementById('ticket-save').dataset.ticketNumber;
   const tickets = getStoredTickets();
   const index = tickets.findIndex((item) => item.ticketNumber === ticketNumber);
   if (index === -1) {
     return;
   }
 
-  const status = document.getElementById('admin-modal-status').value;
-  const urgency = document.getElementById('admin-modal-urgency').value;
-  const note = document.getElementById('admin-modal-note').value.trim();
+  const status = document.getElementById('modal-status').value;
+  const urgency = document.getElementById('modal-urgency').value;
+  const note = document.getElementById('modal-note').value.trim();
 
   if (status === 'geschlossen') {
     tickets.splice(index, 1);
@@ -274,7 +274,7 @@ const updateTicketFromModal = () => {
 };
 
 const deleteTicketFromModal = () => {
-  const ticketNumber = document.getElementById('admin-ticket-delete').dataset.ticketNumber;
+  const ticketNumber = document.getElementById('ticket-delete').dataset.ticketNumber;
   const tickets = getStoredTickets();
   const filtered = tickets.filter((item) => item.ticketNumber !== ticketNumber);
   saveStoredTickets(filtered);
@@ -283,9 +283,9 @@ const deleteTicketFromModal = () => {
 };
 
 const handleNewTicket = () => {
-  const schoolName = document.getElementById('info-school-name')?.value.trim();
-  const contactInfo = document.getElementById('info-contact-info')?.value.trim();
-  const message = document.getElementById('info-message')?.value.trim();
+  const schoolName = document.getElementById('help-school-name')?.value.trim();
+  const contactInfo = document.getElementById('help-contact-info')?.value.trim();
+  const message = document.getElementById('help-message')?.value.trim();
 
   if (!schoolName || !contactInfo) {
     showTicketStatus('Bitte fülle Schulname und Kontaktinformation aus.', 'error');
@@ -300,7 +300,7 @@ const handleNewTicket = () => {
     createdAt: new Date().toISOString(),
     status: 'offen',
     urgency: 'normal',
-    source: 'Infoformular',
+    source: 'Hilfeseite',
     note: '',
   };
 
@@ -313,7 +313,7 @@ const handleNewTicket = () => {
 };
 
 const initInfoPage = () => {
-  const ticketButton = document.getElementById('info-new-ticket');
+  const ticketButton = document.getElementById('help-new-ticket');
   if (!ticketButton) {
     return;
   }
@@ -322,7 +322,7 @@ const initInfoPage = () => {
 };
 
 const initAdminPage = () => {
-  const list = document.getElementById('admin-ticket-list');
+  const list = document.getElementById('ticket-list');
   if (!list) {
     return;
   }
@@ -330,8 +330,8 @@ const initAdminPage = () => {
   renderTicketList();
   updateTicketCounterDisplay();
 
-  const adminNewButton = document.getElementById('admin-new-ticket');
-  const resetCounterButton = document.getElementById('admin-reset-ticket-counter');
+  const adminNewButton = document.getElementById('new-ticket-admin');
+  const resetCounterButton = document.getElementById('reset-ticket-counter');
 
   if (adminNewButton) {
     adminNewButton.addEventListener('click', handleAdminNewTicket);
@@ -353,10 +353,10 @@ const initAdminPage = () => {
     updateTicketCounterDisplay();
   });
 
-  const closeButton = document.getElementById('admin-ticket-modal-close');
-  const modal = document.getElementById('admin-ticket-detail-modal');
-  const saveButton = document.getElementById('admin-ticket-save');
-  const deleteButton = document.getElementById('admin-ticket-delete');
+  const closeButton = document.getElementById('ticket-modal-close');
+  const modal = document.getElementById('ticket-detail-modal');
+  const saveButton = document.getElementById('ticket-save');
+  const deleteButton = document.getElementById('ticket-delete');
 
   if (closeButton) {
     closeButton.addEventListener('click', closeTicketModal);
