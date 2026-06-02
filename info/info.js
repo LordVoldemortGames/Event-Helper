@@ -329,6 +329,7 @@ const initAdminPage = () => {
 
   renderTicketList();
   updateTicketCounterDisplay();
+  initAdminSchools();
 
   const adminNewButton = document.getElementById('admin-new-ticket');
   const resetCounterButton = document.getElementById('admin-reset-ticket-counter');

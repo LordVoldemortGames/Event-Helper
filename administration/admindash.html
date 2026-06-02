@@ -22,7 +22,7 @@
                         <h2>Alle Schulen</h2>
                         <button id="admin-new-school" class="btn">+</button>
                     </header>
-                
+                    <div id="admin-school-list" class="ticket-list" style="margin-top:1rem;"></div>
             </section>
 
             <section class="glass-card">
@@ -98,10 +98,42 @@
             </div>
         </div>
 
+        <div id="admin-schools-detail" class="ticket-modal hidden" aria-hidden="true">
+            <div class="ticket-modal-content">
+                <button id="admin-schools-modal-close" class="btn ticket-close">Schließen</button>
+                <h2 id="admin-schools-modal-title">Neue Schule anlegen</h2>
+                <div class="ticket-detail-grid">
+                    <div>
+                        <label for="admin-school-name">Schulname</label>
+                        <input id="admin-school-name" type="text" placeholder="Schulname">
+                    </div>
+                    <div>
+                        <label for="admin-school-location">Ort</label>
+                        <input id="admin-school-location" type="text" placeholder="Ort">
+                    </div>
+                    <div>
+                        <label for="admin-school-pin">SchulPIN</label>
+                        <input id="admin-school-pin" type="text" maxlength="6" placeholder="6-stellige PIN">
+                    </div>
+                </div>
+                <div class="ticket-section">
+                    <label for="admin-school-notes">Notizen</label>
+                    <textarea id="admin-school-notes" rows="4" placeholder="Notizen zur Schule"></textarea>
+                </div>
+                <div id="admin-school-error" class="warn" style="display:none; margin-bottom:1rem;"></div>
+                <div class="ticket-actions">
+                    <button id="admin-school-save" class="btn">Speichern</button>
+                    <button id="admin-school-delete" class="btn btnev">Löschen</button>
+                    <button id="admin-school-cancel" class="btn btnev">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+
         <footer class="footer">
             <p>&copy; 2026 EventHelper project visit <a href="https://github.com/LordVoldemortGames/Event-Helper" target="_blank">EventHelper on GitHub</a> for more information</p>
         </footer>
         <script src="../info/info.js"></script>
+        <script src="admindash.js"></script>
 
     </body>
 </html>

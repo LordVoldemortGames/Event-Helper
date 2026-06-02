@@ -31,8 +31,8 @@ if (schoolpinInput) {
 }
 
 // Warnung für Login-Probleme
-const passwordLoginInput = document.getElementById("password-login");
-const passwordRegisterInput = document.getElementById("password-register");
+const passwordLoginInput = document.getElementById("login-password");
+const passwordRegisterInput = document.getElementById("register-password");
 const warnLabel = document.getElementById("warn-login");
 
 const updateWarnings = (event) => {
@@ -40,7 +40,7 @@ const updateWarnings = (event) => {
 
     // Caps Lock erkennen
     if (event.getModifierState && event.getModifierState('CapsLock')) {
-        warnings.push("⚠️ CapsLock ist aktiviert!");
+        warnings.push("! CapsLock ist aktiviert!");
     }
 
     // Warnung anzeigen oder verstecken
@@ -92,7 +92,7 @@ const handleLogin = (usernameInput, passwordInput) => {
     if (username === 'admin' && password === 'sternbus8') {
         redirectToDashboard();
     } else {
-        showWarning('Benutzername oder Passwort falsch. Verwende admin/sternbus8.');
+        showWarning('INTERR 201: Benutzername oder Passwort falsch.');
     }
 };
 
@@ -100,7 +100,7 @@ const initLogin = () => {
     clearWarning();
 
     const usernameInput = document.getElementById('login-username');
-    const passwordInput = document.getElementById('password-login');
+    const passwordInput = document.getElementById('login-password');
     const loginButton = document.getElementById('login-button');
 
     const triggerLoginClick = (event) => {

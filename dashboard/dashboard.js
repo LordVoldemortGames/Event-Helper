@@ -1,5 +1,3 @@
-document.getElementById("school-name").textContent = "Werner-von-Siemens-Gymnasium";
-
 // Materialliste-Funktionalität
 const MATERIAL_STORAGE_KEY = 'eventhelper_materials';
 
