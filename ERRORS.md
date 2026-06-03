@@ -1,6 +1,10 @@
 # Errors
-## 10x
+here is a list of possible errors and what they mean
+
+## Errors 1XX
+### Errors10X
 101: Variable not found
 
-## 20x
+## Errors 2XX
+### Errors 20X
 201: Wrong Input
