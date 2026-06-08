@@ -7,4 +7,4 @@ here is a list of possible errors and what they mean
 
 ## Errors 2XX
 ### Errors 20X
-201: Wrong Input
+201: Wrong Input (PW user)
