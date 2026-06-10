@@ -11,8 +11,9 @@
 
     <body>
 
-        <header class="header">
+        <header class="header" style="position:relative;">
             <h1>EventHelper Dashboard - <label id="school-name">INTERR: 101</label></h1>
+            <button id="dash-logout" class="btn" style="position:absolute; right:1rem; top:0.75rem;">Logout</button>
         </header>
     
         <main class="container">
@@ -22,7 +23,10 @@
                         <h2>Aktuelle Projekte</h2>
                         <button id="dash-new-project" class="btn">+</button>
                     </header>
-                
+                <div id="dash-project-list" style="margin-top:1rem; display:flex; flex-direction:column; gap:0.75rem;">
+                    <!-- Projektkarten werden hier eingefügt -->
+                </div>
+
             </section>
 
             <section class="glass-card"> 
@@ -108,6 +112,50 @@
                     <button id="dash-material-modal-save" class="btn">Speichern</button>
                     <button id="dash-material-modal-delete" class="btn btnev">Löschen</button>
                     <button id="dash-material-modal-cancel" class="btn">Abbrechen</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Project Modal -->
+        <div id="dash-project-modal" class="material-modal hidden" aria-hidden="true">
+            <div class="material-modal-content">
+                <button id="dash-project-modal-close" class="btn material-close">×</button>
+                <h3 id="dash-project-modal-title">Projekt bearbeiten</h3>
+
+                <div class="modal-form-group">
+                    <label for="dash-modal-project-name">Name:</label>
+                    <input type="text" id="dash-modal-project-name" required>
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="dash-modal-project-date">Datum:</label>
+                    <input type="date" id="dash-modal-project-date">
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="dash-modal-project-description">Beschreibung:</label>
+                    <textarea id="dash-modal-project-description" rows="3"></textarea>
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="dash-modal-project-notes">Notizen:</label>
+                    <textarea id="dash-modal-project-notes" rows="2"></textarea>
+                </div>
+
+                <div class="modal-form-group">
+                    <label>Teilnehmer (mehrfach auswählbar):</label>
+                    <div id="dash-modal-project-participants" style="max-height:120px; overflow:auto; border:1px solid rgba(255,255,255,0.05); padding:6px;"></div>
+                </div>
+
+                <div class="modal-form-group">
+                    <label>Material (aus Materialliste):</label>
+                    <div id="dash-modal-project-materials" style="max-height:120px; overflow:auto; border:1px solid rgba(255,255,255,0.05); padding:6px;"></div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button id="dash-project-modal-save" class="btn">Speichern</button>
+                    <button id="dash-project-modal-delete" class="btn btnev">Löschen</button>
+                    <button id="dash-project-modal-cancel" class="btn">Abbrechen</button>
                 </div>
             </div>
         </div>

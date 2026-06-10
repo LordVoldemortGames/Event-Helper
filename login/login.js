@@ -89,10 +89,142 @@ const handleLogin = (usernameInput, passwordInput) => {
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
 
+    // Admin shortcut
     if (username === 'admin' && password === 'sternbus8') {
+        // mark current user
+        localStorage.setItem('eventhelper_currentUser', JSON.stringify({ username: 'admin', role: 'admin' }));
         redirectToDashboard();
+        return;
+    }
+
+    // Try to match stored users
+    const raw = localStorage.getItem('eventhelper_users');
+    let users = [];
+    try {
+        users = raw ? JSON.parse(raw) || [] : [];
+    } catch {
+        users = [];
+    }
+
+    const usernameNorm = username.toLowerCase();
+    const found = users.find((u) => String(u.username).toLowerCase() === usernameNorm && String(u.password).trim() === password);
+    if (found) {
+        localStorage.setItem('eventhelper_currentUser', JSON.stringify({ username: found.username, school: found.schoolName, role: 'student' }));
+        // store current school name and pin separately for convenience
+        if (found.schoolName) {
+            localStorage.setItem('eventhelper_currentSchool', found.schoolName);
+        }
+        if (found.schoolPin) {
+            localStorage.setItem('eventhelper_currentSchoolPin', String(found.schoolPin));
+        }
+        // go to student dashboard
+        window.location.href = '../dashboard/dashboard.html';
     } else {
         showWarning('INTERR 201: Benutzername oder Passwort falsch.');
+    }
+};
+
+// Helpers for registration/storage
+const getStoredSchools = () => {
+    const raw = localStorage.getItem('eventhelper_schools');
+    if (!raw) return [];
+    try { return JSON.parse(raw) || []; } catch { return []; }
+};
+
+const getStoredUsers = () => {
+    const raw = localStorage.getItem('eventhelper_users');
+    if (!raw) return [];
+    try {
+        const arr = JSON.parse(raw) || [];
+        // dedupe by username + schoolPin (keep first)
+        const seen = new Set();
+        const dedup = [];
+        let changed = false;
+        for (const u of arr) {
+            const key = `${String(u.username || '').trim().toLowerCase()}::${String(u.schoolPin || '').trim()}`;
+            if (seen.has(key)) {
+                changed = true;
+                continue;
+            }
+            seen.add(key);
+            dedup.push(u);
+        }
+        if (changed) {
+            try { localStorage.setItem('eventhelper_users', JSON.stringify(dedup)); } catch (e) { /* ignore */ }
+        }
+        return dedup;
+    } catch {
+        return [];
+    }
+};
+
+const saveStoredUsers = (users) => {
+    localStorage.setItem('eventhelper_users', JSON.stringify(users));
+};
+
+const handleRegister = () => {
+    const first = input1?.value.trim() || '';
+    const last = input2?.value.trim() || '';
+    const password = passwordRegisterInput?.value.trim() || '';
+    const rawPin = schoolpinInput?.value || '';
+    const pin = String(rawPin).trim();
+
+    if (!first || !last || !password || !pin) {
+        showWarning('Bitte alle Registrierungsfelder ausfüllen.');
+        return;
+    }
+
+    // normalize PIN to 6-digit string (preserve leading zeros)
+    const normPin = pin.padStart(6, '0');
+
+    if (!/^\d{6}$/.test(normPin)) {
+        showWarning('Die SchulPIN muss genau 6 Ziffern sein.');
+        return;
+    }
+    const schools = getStoredSchools();
+    const school = schools.find((s) => String(s.schulpin) === normPin);
+    if (!school) {
+        showWarning('Keine Schule mit dieser PIN gefunden.');
+        return;
+    }
+
+    const username = (first.charAt(0) || '').toLowerCase() + last.toLowerCase();
+
+    const users = getStoredUsers();
+    // prevent duplicate username for same school
+    const exists = users.some((u) => u.username === username && String(u.schoolPin) === normPin);
+    if (exists) {
+        showWarning('Benutzername bereits vorhanden. Bitte wähle einen anderen Namen.');
+        return;
+    }
+
+    const newUser = {
+        username,
+        password,
+        firstname: first,
+        lastname: last,
+        schoolPin: normPin,
+        schoolName: school.name,
+        createdAt: new Date().toISOString(),
+    };
+
+    users.push(newUser);
+    saveStoredUsers(users);
+
+    // auto-fill login fields and perform login
+    const loginUsernameInput = document.getElementById('login-username');
+    const loginPasswordInput = document.getElementById('login-password');
+    if (loginUsernameInput && loginPasswordInput) {
+        loginUsernameInput.value = username;
+        loginPasswordInput.value = password;
+        // small timeout to ensure UI updated
+        setTimeout(() => handleLogin(loginUsernameInput, loginPasswordInput), 100);
+    } else {
+        // fallback: just store as current user and redirect
+        localStorage.setItem('eventhelper_currentUser', JSON.stringify({ username, school: school.name, role: 'student' }));
+        localStorage.setItem('eventhelper_currentSchool', school.name);
+        localStorage.setItem('eventhelper_currentSchoolPin', String(normPin));
+        window.location.href = '../dashboard/dashboard.html';
     }
 };
 
@@ -128,6 +260,42 @@ const initLogin = () => {
     if (passwordInput) {
         passwordInput.addEventListener('keydown', triggerLoginClick);
     }
+
+    const registerButton = document.getElementById('register-button');
+    if (registerButton) {
+        registerButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            handleRegister();
+        });
+    }
+
+    const registerUsernameLabel = document.getElementById('register-username');
+    if (registerUsernameLabel) {
+        registerUsernameLabel.style.cursor = 'pointer';
+        registerUsernameLabel.title = 'Klicken um Registrierung auszulösen';
+        registerUsernameLabel.addEventListener('click', (event) => {
+            event.preventDefault();
+            handleRegister();
+        });
+    }
+
+    const registerInputs = [
+        document.getElementById('register-firstname'),
+        document.getElementById('register-lastname'),
+        document.getElementById('register-password'),
+        document.getElementById('register-schoolpin'),
+    ];
+
+    registerInputs.forEach((inp) => {
+        if (inp) {
+            inp.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleRegister();
+                }
+            });
+        }
+    });
 };
 
 if (document.readyState === 'loading') {
